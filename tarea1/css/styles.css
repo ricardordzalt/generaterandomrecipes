@@ -1,0 +1,21 @@
+li  {
+    list-style-type: square;
+    color: white;
+}
+
+p   {
+    color:teal;
+   
+}
+
+.estilo {
+    font-style: italic;
+    color: indigo};
+}
+
+
+
+header {
+    text-align: center;
+}
+
