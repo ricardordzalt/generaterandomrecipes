@@ -21,6 +21,16 @@ li {
 
 p {
     text-align: center;
-    color: orange;
+    color: burlywood;
     font-size: 20px;
+}
+
+a{
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.textfaq {
+    color: black;
+    list-style-type: disc;
 }
