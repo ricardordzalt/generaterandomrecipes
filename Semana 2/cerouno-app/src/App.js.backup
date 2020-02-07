@@ -1,0 +1,14 @@
+import React from 'react';
+import Paragraph from './components/Paragraph';
+import MyInfo from './components/MyInfo';
+function App() {
+  return (
+    <div>
+      <h1>Hola!</h1>
+      <Paragraph/>
+      <MyInfo/>
+    </div>
+  );
+}
+
+export default App;
