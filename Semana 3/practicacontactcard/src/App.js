@@ -1,11 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Directory from './components/Directory'
 
 
-const App = () => (
+const App = () => {
+  return(
   <div>
     <Directory/>
   </div>
-)
+  );
+}
 
 export default App;
