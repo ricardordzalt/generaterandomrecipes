@@ -1,8 +1,6 @@
 import React from 'react';
 
-function MainContent(){
-    return(
+const MainContent = () => (
     <h1>MainContent</h1>
     );
-}
 export default MainContent;
