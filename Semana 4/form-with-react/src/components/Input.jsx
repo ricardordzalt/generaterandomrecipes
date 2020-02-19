@@ -9,6 +9,7 @@ const Input = props => {
             <input
             className="form-control"
             id={props.name}
+            name={props.name}
             type={props.inputType}
             value={props.value}
             placeholder={props.placeHolder}

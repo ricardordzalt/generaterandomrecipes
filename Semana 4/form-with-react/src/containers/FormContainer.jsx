@@ -6,7 +6,7 @@ import Button from '../components/Button';
 const INITIAL_STATE = [
     {
         name: 'Richie Valens',
-        age: '26 pero me veo de 20'
+        age: '26 pero me veo de 20',
     }
 ];
 
@@ -14,36 +14,36 @@ class FormContainer extends Component{
             state = {
             newUser: {
                 name: '',
-                age: ''
+                age: '',
+                username: ''
             },
             usersSaved: INITIAL_STATE
         }
     
-    
+    componentDidMount(){
+        const url= 'https://jsonplaceholder.typicode.com/users';
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            this.setState({
+                usersSaved: data
+            });
+        });         
+        }
 
-    handleName = (e) => {
+
+
+    handleInput = (e) => {
         let value = e.target.value;
+        let name = e.target.name;
         this.setState(
             prevState =>({
-                    newUser: {
-                        ...prevState.newUser,
-                        name: value
-                    }
+                newUser:{
+                ...prevState.newUser,
+                [name]: value,
                 }
-            )
-        );
-    }
-
-    handleAge = (e) => {
-        let value = e.target.value;
-        this.setState(
-            prevState =>({
-                newUser: {
-                      ...prevState.newUser,
-                      age: value
-                 }
-              }
-            )
+            })
         );
     }
 
@@ -60,7 +60,8 @@ class FormContainer extends Component{
             ],
             newUser: {
                 name: '',
-                age: ''
+                age: '',
+                username: ''
             }
         }
         ));
@@ -71,7 +72,8 @@ class FormContainer extends Component{
             this.setState({
                 newUser: {
                     name: '',
-                    age: ''
+                    age: '',
+                    username: ''
                 }
               }
            );
@@ -88,15 +90,22 @@ class FormContainer extends Component{
                     type="text"
                     value={this.state.newUser.name}
                     placeHolder="Ingresa tu nombre"
-                    handleChange={this.handleName}
+                    handleChange={this.handleInput}
                  />
                  <Input
-                    name="name"
+                    name="age"
                     type="text"
                     value={this.state.newUser.age}
                     placeHolder="Ingresa tu edad"
-                    handleChange={this.handleAge}
+                    handleChange={this.handleInput}
                   />
+                  <Input
+                     name="username"
+                     type="text"
+                     value={this.state.newUser.username}
+                     placeHolder="Ingresa tu user name"
+                     handleChange={this.handleInput}
+                   />
                   <Button 
                       action={this.handleFormSubmit}
                       title="Enviar"

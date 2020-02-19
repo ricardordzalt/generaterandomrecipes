@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import contactsData from "../components/contactsData";
+//import contactsData from "../components/contactsData";
 import ContactsCard from "../components/ContactsCard";
 import Button from '../components/Button';
 import Input from '../components/Input';
 
-const INITIAL_STATE = contactsData
 class DirectoryContainer extends Component {
     state = {
-      contacts: INITIAL_STATE,
+      contacts: [],
     catsSaved: [{
       name: '',
       imgUrl: '',
@@ -15,7 +14,6 @@ class DirectoryContainer extends Component {
       email: ''
     }]
     };
-
 
   handleFormSubmit = (e) =>{
     e.preventDefault();
@@ -28,9 +26,9 @@ class DirectoryContainer extends Component {
         ],
         catsSaved: {
             name: '',
-            imgUrl: '',
             phone: '',
-            email: ''
+            email: '',
+            website: ''
         }
     }
     ));
@@ -41,63 +39,35 @@ class DirectoryContainer extends Component {
    this.setState({
     catsSaved: {
            name: '',
-           imgUrl: '',
            phone: '',
-           email: ''
+           email: '',
+           website: ''
   }
 }
 );
 }
-
-  handleName = (e) =>{
-    let value = e.target.value;
-    this.setState(
-        prevState =>({
-          catsSaved: {
-                    ...prevState.catsSaved,
-                    name: value
-                }
-            }
-        )
-    );
+showInfoApi = (e) => {
+  e.preventDefault();
+   const url= 'https://jsonplaceholder.typicode.com/users';fetch(url)
+  .then(response => response.json())
+  .then(data => {
+      console.log(data);
+      this.setState({
+        contacts: data
+      });
+  }); 
 }
 
-handleImgUrl = (e) =>{
+handleInput = (e) => {
   let value = e.target.value;
+  let name = e.target.name;
   this.setState(
       prevState =>({
-        catsSaved: {
-                  ...prevState.catsSaved,
-                  imgUrl: value
-              }
+        catsSaved:{
+          ...prevState.catsSaved,
+          [name]: value,
           }
-      )
-  );
-}
-
-handlePhone = (e) =>{
-  let value = e.target.value;
-  this.setState(
-      prevState =>({
-        catsSaved: {
-                  ...prevState.catsSaved,
-                  phone: value
-              }
-          }
-      )
-  );
-}
-
-handleEmail = (e) =>{
-  let value = e.target.value;
-  this.setState(
-      prevState =>({
-        catsSaved: {
-                  ...prevState.catsSaved,
-                  email: value
-              }
-          }
-      )
+      })
   );
 }
 
@@ -109,7 +79,7 @@ handleEmail = (e) =>{
     return (
       <div className="container">
         <div className="row">
-        <div className="col-6">
+        <div className="col-8">
         {showinfo}  
         {this.state.contacts.length === 0 ? (
           <p>No hay gatitos disponibles</p>
@@ -117,35 +87,35 @@ handleEmail = (e) =>{
           <></>
         )}
          </div>
-         <div className="col-6">
+         <div className="col-4">
            <form>
                  <Input
                     name="name"
                     type="text"
                     value={this.state.catsSaved.name}
                     placeHolder="Ingresa el nombre del gatito"
-                    handleChange={this.handleName}
+                    handleChange={this.handleInput}
                   />
                   <Input
-                     name="name"
+                     name="phone"
                      type="text"
-                     value={this.state.catsSaved.imgUrl}
-                     placeHolder="Ingresa la url de la imagen"
-                     handleChange={this.handleImgUrl}
+                     value={this.state.catsSaved.phone}
+                     placeHolder="Ingresa el teléfono"
+                     handleChange={this.handleInput}
                    />
                    <Input
-                      name="name"
+                      name="email"
                       type="text"
-                      value={this.state.catsSaved.phone}
-                      placeHolder="Ingresa un teléfono"
-                      handleChange={this.handlePhone}
+                      value={this.state.catsSaved.email}
+                      placeHolder="Ingresa un correo electrónico"
+                      handleChange={this.handleInput}
                     />
                     <Input
-                       name="name"
+                       name="website"
                        type="text"
-                       value={this.state.catsSaved.email}
-                       placeHolder="Ingresa un correo"
-                       handleChange={this.handleEmail}
+                       value={this.state.catsSaved.website}
+                       placeHolder="Ingresa un sitio web"
+                       handleChange={this.handleInput}
                      />
                      <Button 
                          action={this.handleFormSubmit}
@@ -155,6 +125,10 @@ handleEmail = (e) =>{
                           action={this.handleClearForm}
                           title="Borrar información"
                        />
+                       <Button 
+                           action={this.showInfoApi}
+                           title="Agregar información de contactos"
+                        />
                       </form>
          </div>
         </div>

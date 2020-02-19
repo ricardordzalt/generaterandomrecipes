@@ -5,6 +5,7 @@ const previewData = props => {
         <div key={idx}>
             <p>{user.name}</p>
             <p>{user.age}</p>
+            <p>{user.username}</p>
         </div>
     ));
     return(
