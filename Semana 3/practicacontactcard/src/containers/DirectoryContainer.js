@@ -45,6 +45,7 @@ class DirectoryContainer extends Component {
   }
 }
 );
+this.props.history.push('/');
 }
 showInfoApi = (e) => {
   e.preventDefault();
@@ -93,7 +94,7 @@ handleInput = (e) => {
                     name="name"
                     type="text"
                     value={this.state.catsSaved.name}
-                    placeHolder="Ingresa el nombre del gatito"
+                    placeHolder="Ingresa el nombre del contacto"
                     handleChange={this.handleInput}
                   />
                   <Input
@@ -119,7 +120,7 @@ handleInput = (e) => {
                      />
                      <Button 
                          action={this.handleFormSubmit}
-                         title="Agregar gatito"
+                         title="Agregar contacto"
                       />
                       <Button 
                           action={this.handleClearForm}
