@@ -45,7 +45,6 @@ class DirectoryContainer extends Component {
   }
 }
 );
-this.props.history.push('/');
 }
 showInfoApi = (e) => {
   e.preventDefault();
